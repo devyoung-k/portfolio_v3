@@ -17,7 +17,6 @@ import { GitHubIcon } from "@/components/icons";
 import { projects } from "@/data/projects";
 import { ImageWithFallback } from "@/components/ImageWithFallback";
 import { MagneticButton } from "@/components/MagneticButton";
-import { useState } from "react";
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
@@ -27,7 +26,6 @@ const fadeUp = {
 export function ProjectDetailPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
-  const [, setImgLoaded] = useState(false);
 
   const projectIndex = projects.findIndex((p) => p.slug === slug);
   const project = projects[projectIndex];
@@ -74,7 +72,6 @@ export function ProjectDetailPage() {
             src={project.image}
             alt={project.title}
             className="w-full h-full object-cover"
-            onLoad={() => setImgLoaded(true)}
           />
         </motion.div>
         <div className="absolute inset-0 bg-linear-to-t from-background via-background/60 to-transparent" />
@@ -163,18 +160,24 @@ export function ProjectDetailPage() {
           transition={{ delay: 0.55 }}
           className="flex flex-wrap gap-3 mb-12"
         >
-          <MagneticButton>
-            <a
-              href={project.demo}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-emerald-600 to-teal-600 text-white text-[0.875rem] hover:shadow-lg hover:shadow-emerald-500/25 transition-shadow font-[Pretendard]"
-            >
-              <ExternalLink className="w-4 h-4" />
-              Live Demo
-            </a>
-          </MagneticButton>
+          {project.demo && (
+            <MagneticButton>
+              <a
+                href={project.demo}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-emerald-600 to-teal-600 text-white text-[0.875rem] hover:shadow-lg hover:shadow-emerald-500/25 transition-shadow font-[Pretendard]"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Live Demo
+              </a>
+            </MagneticButton>
+          )}
           <MagneticButton>
             <a
               href={project.github}
+              target="_blank"
+              rel="noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground text-[0.875rem] hover:bg-accent/50 transition-all font-[Pretendard]"
             >
               <GitHubIcon className="w-4 h-4" />
@@ -226,7 +229,7 @@ export function ProjectDetailPage() {
             <div className="grid gap-4">
               {project.screenshots.map((src, i) => (
                 <motion.div
-                  key={i}
+                  key={`${src}-${i}`}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -260,7 +263,7 @@ export function ProjectDetailPage() {
           <div className="grid gap-3">
             {project.highlights.map((item, i) => (
               <motion.div
-                key={i}
+                key={`${item}-${i}`}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -292,7 +295,7 @@ export function ProjectDetailPage() {
           <div className="grid gap-6">
             {project.challenges.map((c, i) => (
               <motion.div
-                key={i}
+                key={`${c.problem}-${i}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

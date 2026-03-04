@@ -100,22 +100,30 @@ export function ProjectsPage() {
 
                       <div className="absolute bottom-4 right-4 flex gap-2 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300">
                         <button
+                          type="button"
+                          disabled={!project.github}
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
+                            if (!project.github) return;
                             window.open(project.github, "_blank");
                           }}
-                          className="w-9 h-9 rounded-lg bg-white/15 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/25 transition-colors"
+                          aria-label="Open GitHub"
+                          className="w-9 h-9 rounded-lg bg-white/15 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/25 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                         >
                           <GitHubIcon className="w-4 h-4" />
                         </button>
                         <button
+                          type="button"
+                          disabled={!project.demo}
                           onClick={(e) => {
                             e.preventDefault();
                             e.stopPropagation();
+                            if (!project.demo) return;
                             window.open(project.demo, "_blank");
                           }}
-                          className="w-9 h-9 rounded-lg bg-white/15 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/25 transition-colors"
+                          aria-label="Open Live Demo"
+                          className="w-9 h-9 rounded-lg bg-white/15 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/25 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                         >
                           <ExternalLink className="w-4 h-4" />
                         </button>
