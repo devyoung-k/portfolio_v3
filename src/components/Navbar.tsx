@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { Link, useLocation } from "react-router";
 import { Menu, X, Moon, Sun, Code2 } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
+import { profile } from "@/data/profile";
 
 interface NavbarProps {
   darkMode: boolean;
@@ -58,7 +59,7 @@ export function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
             <Code2 className="w-5 h-5 text-white" />
           </motion.div>
           <span className="text-foreground font-[Pretendard] tracking-tight">
-            DevPortfolio
+            {profile.englishName}
           </span>
         </Link>
 

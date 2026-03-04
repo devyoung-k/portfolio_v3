@@ -1,16 +1,17 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { motion } from "motion/react";
-import { ArrowRight, Download, Mail, Terminal } from "lucide-react";
+import { ArrowRight, Mail, Terminal } from "lucide-react";
 import { MagneticButton } from "@/components/MagneticButton";
 import { TextReveal } from "@/components/TextReveal";
-import { GitHubIcon, LinkedInIcon } from "@/components/icons";
-import { useEffect, useState } from "react";
+import { GitHubIcon } from "@/components/icons";
+import { profile } from "@/data/profile";
 
 const typewriterLines = [
   "const developer = {",
-  '  name: "강선영",',
-  '  role: "Web Developer",',
-  "  passion: true,",
+  `  name: \"${profile.name}\",`,
+  `  role: \"${profile.role}\",`,
+  "  buildsForUsers: true,",
   "};",
 ];
 
@@ -29,16 +30,17 @@ function TypeWriter() {
       const timer = setTimeout(() => setCurrentChar((c) => c + 1), 40);
       return () => clearTimeout(timer);
     }
+
     const timer = setTimeout(() => {
-      setCurrentLine((l) => l + 1);
+      setCurrentLine((line) => line + 1);
       setCurrentChar(0);
     }, 200);
+
     return () => clearTimeout(timer);
   }, [currentLine, currentChar, done]);
 
   return (
     <div className="rounded-2xl bg-[#0f1a1f] border border-white/5 overflow-hidden shadow-2xl shadow-emerald-500/5">
-      {/* Terminal header */}
       <div className="px-4 py-3 bg-white/5 flex items-center gap-2">
         <div className="flex gap-1.5">
           <span className="w-3 h-3 rounded-full bg-red-400/80" />
@@ -50,18 +52,18 @@ function TypeWriter() {
           developer.ts
         </span>
       </div>
-      {/* Code content */}
+
       <div className="p-5 font-mono text-[0.8rem] leading-loose min-h-45">
-        {typewriterLines.map((line, i) => {
-          if (i > currentLine) return null;
-          const text = i < currentLine ? line : line.slice(0, currentChar);
+        {typewriterLines.map((line, index) => {
+          if (index > currentLine) return null;
+          const text = index < currentLine ? line : line.slice(0, currentChar);
           const hasColon = text.includes(":");
           const parts = hasColon ? text.split(":") : [text];
 
           return (
-            <div key={i} className="flex">
+            <div key={`${line}-${index}`} className="flex">
               <span className="text-white/20 w-6 shrink-0 select-none text-right mr-4">
-                {i + 1}
+                {index + 1}
               </span>
               <span className="whitespace-pre">
                 {hasColon ? (
@@ -73,7 +75,7 @@ function TypeWriter() {
                 ) : (
                   <span className="text-emerald-400">{text}</span>
                 )}
-                {i === currentLine && !done && (
+                {index === currentLine && !done && (
                   <span className="inline-block w-0.5 h-[1em] bg-emerald-400 ml-px animate-pulse align-middle" />
                 )}
               </span>
@@ -88,16 +90,17 @@ function TypeWriter() {
 const stacks = [
   { label: "React", color: "bg-teal-500/15 text-teal-400 border-teal-500/20" },
   { label: "TypeScript", color: "bg-blue-500/15 text-blue-400 border-blue-500/20" },
+  { label: "Next.js", color: "bg-white/10 text-white/70 border-white/10" },
   { label: "Node.js", color: "bg-green-500/15 text-green-400 border-green-500/20" },
   { label: "PostgreSQL", color: "bg-indigo-500/15 text-indigo-400 border-indigo-500/20" },
-  { label: "Next.js", color: "bg-white/10 text-white/70 border-white/10" },
   { label: "Docker", color: "bg-sky-500/15 text-sky-400 border-sky-500/20" },
 ];
 
 export function HomePage() {
+  const githubLink = profile.socials.find((social) => social.id === "github");
+
   return (
     <section className="min-h-screen flex items-center justify-center px-6 pt-20 pb-10 relative overflow-hidden">
-      {/* Subtle gradient orbs */}
       <motion.div
         animate={{ scale: [1, 1.2, 1], opacity: [0.12, 0.18, 0.12] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
@@ -110,7 +113,6 @@ export function HomePage() {
       />
 
       <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center relative z-10">
-        {/* Left content */}
         <div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -123,7 +125,7 @@ export function HomePage() {
               <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500" />
             </span>
             <span className="text-[0.8rem] text-muted-foreground font-[Pretendard]">
-              새로운 프로젝트에 열려있습니다
+              {profile.availability}
             </span>
           </motion.div>
 
@@ -134,25 +136,22 @@ export function HomePage() {
             안녕하세요,
           </TextReveal>
 
-          <div className="mb-1">
-            <TextReveal
-              as="h1"
-              delay={0.2}
-              className="font-[Pretendard] text-[2.5rem] md:text-[3.25rem] leading-[1.15] bg-linear-to-r from-emerald-500 via-emerald-500 to-teal-500 bg-clip-text text-transparent"
-            >
-              풀스택 개발자
-            </TextReveal>
-          </div>
+          <TextReveal
+            as="h1"
+            delay={0.2}
+            className="font-[Pretendard] text-[2.5rem] md:text-[3.25rem] leading-[1.15] bg-linear-to-r from-emerald-500 via-emerald-500 to-teal-500 bg-clip-text text-transparent"
+          >
+            {profile.heroRole}
+          </TextReveal>
 
           <TextReveal
             as="h1"
             delay={0.35}
             className="text-foreground font-[Pretendard] text-[2.5rem] md:text-[3.25rem] leading-[1.15] mb-6"
           >
-            김개발입니다.
+            {`${profile.name}입니다.`}
           </TextReveal>
 
-          {/* Code terminal - mobile only */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -168,28 +167,25 @@ export function HomePage() {
             transition={{ duration: 0.6, delay: 0.6 }}
             className="text-muted-foreground text-[1.05rem] mb-8 max-w-lg font-[Pretendard] leading-[1.8]"
           >
-            사용자 경험에 집중한 웹 애플리케이션을 설계하고 개발합니다.
-            <br />
-            3년 이상의 경험으로 효율적이고 확장 가능한 솔루션을 만듭니다.
+            {profile.bio}
           </motion.p>
 
-          {/* Stack pills */}
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.7 }}
             className="flex flex-wrap gap-2 mb-10"
           >
-            {stacks.map((s, i) => (
+            {stacks.map((stack, index) => (
               <motion.span
-                key={s.label}
+                key={stack.label}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.8 + i * 0.06 }}
+                transition={{ delay: 0.8 + index * 0.06 }}
                 whileHover={{ scale: 1.08, y: -2 }}
-                className={`px-3 py-1.5 rounded-lg border text-[0.75rem] font-mono cursor-default ${s.color}`}
+                className={`px-3 py-1.5 rounded-lg border text-[0.75rem] font-mono cursor-default ${stack.color}`}
               >
-                {s.label}
+                {stack.label}
               </motion.span>
             ))}
           </motion.div>
@@ -214,8 +210,8 @@ export function HomePage() {
                 to="/contact"
                 className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-border text-foreground text-[0.9rem] hover:bg-accent/50 transition-all font-[Pretendard] backdrop-blur-sm"
               >
-                <Download className="w-4 h-4" />
-                이력서 다운로드
+                <Mail className="w-4 h-4" />
+                연락하기
               </Link>
             </MagneticButton>
           </motion.div>
@@ -231,25 +227,23 @@ export function HomePage() {
             </span>
             <div className="h-px w-8 bg-border" />
             <div className="flex gap-2">
-              {[
-                { Icon: GitHubIcon, label: "GitHub" },
-                { Icon: LinkedInIcon, label: "LinkedIn" },
-                { Icon: Mail, label: "Email" },
-              ].map(({ Icon, label }) => (
-                <MagneticButton key={label}>
+              {githubLink && (
+                <MagneticButton>
                   <a
-                    href="#"
+                    href={githubLink.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={githubLink.label}
                     className="w-10 h-10 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:text-emerald-500 hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all"
                   >
-                    <Icon className="w-4 h-4" />
+                    <GitHubIcon className="w-4 h-4" />
                   </a>
                 </MagneticButton>
-              ))}
+              )}
             </div>
           </motion.div>
         </div>
 
-        {/* Right - Code terminal (desktop only) */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}

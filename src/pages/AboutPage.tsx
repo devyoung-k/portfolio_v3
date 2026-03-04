@@ -2,79 +2,98 @@ import { motion } from "motion/react";
 import { SectionHeading } from "@/components/SectionHeading";
 import { TiltCard } from "@/components/TiltCard";
 import { AnimatedCounter } from "@/components/AnimatedCounter";
-import { Code2, Server, Database, Monitor, Brain, Users } from "lucide-react";
+import { Code2, Workflow, Monitor, BellRing, Users, Globe } from "lucide-react";
+import { projects } from "@/data/projects";
+import { profile } from "@/data/profile";
 
 const highlights = [
   {
-    icon: Code2,
-    title: "프론트엔드 개발",
+    key: "problem-solving",
+    icon: Workflow,
+    title: "문제 중심 개발",
     description:
-      "React 19, Next.js 16, TypeScript 기반의 모던 웹 앱을 구축합니다. TailwindCSS, Framer Motion으로 반응형 UI와 인터랙션을 구현합니다.",
+      "기능 구현 전에 문제와 실패 시나리오를 먼저 정리하고, 사용자 흐름 기준으로 우선순위를 결정합니다.",
     gradient: "from-teal-500 to-blue-500",
   },
   {
-    icon: Server,
-    title: "백엔드 개발",
+    key: "frontend",
+    icon: Code2,
+    title: "프론트엔드 구현",
     description:
-      "Spring Boot + PostgreSQL + Redis로 RESTful API를 설계합니다. JWT 인증, RBAC 권한 관리, 스케줄러 기반 자동화를 구현합니다.",
+      "React + TypeScript 기반으로 유지보수 가능한 구조를 만들고, 상태/비동기 흐름을 일관되게 다룹니다.",
     gradient: "from-green-500 to-emerald-500",
   },
   {
-    icon: Database,
-    title: "데이터베이스 & BaaS",
-    description:
-      "PostgreSQL, Redis, Supabase를 활용한 데이터 설계와 실시간 기능 구현. React Query로 캐싱 전략을 최적화합니다.",
-    gradient: "from-emerald-500 to-teal-500",
-  },
-  {
+    key: "desktop",
     icon: Monitor,
-    title: "데스크톱 앱 개발",
+    title: "데스크톱 앱 경험",
     description:
-      "Electron + React + Vite로 크로스 플랫폼 데스크톱 앱을 개발합니다. IPC 통신과 네이티브 기능을 활용합니다.",
+      "Scriba, ID Card Generator처럼 Electron 앱을 개발하며 로컬 환경 제약과 성능 이슈를 직접 해결했습니다.",
     gradient: "from-sky-500 to-blue-500",
   },
   {
-    icon: Brain,
-    title: "AI / LLM 활용",
+    key: "alerts",
+    icon: BellRing,
+    title: "운영 관점 설계",
     description:
-      "whisper.cpp 음성 인식과 Ollama 로컬 LLM을 활용한 AI 기능을 구현합니다. 온디바이스 처리로 프라이버시를 보장합니다.",
+      "APIGuard에서 알림 쿨다운과 실패 임계치를 설계해 운영 피로도를 낮추는 기능을 구현했습니다.",
     gradient: "from-amber-500 to-orange-500",
   },
   {
+    key: "collaboration",
     icon: Users,
-    title: "팀 프로젝트 리드",
+    title: "협업 경험",
     description:
-      "FSD 아키텍처 설계부터 코드 리뷰까지, 프론트엔드 리드로서 팀 프로젝트를 이끈 경험이 있습니다.",
+      "Find It 프로젝트에서 프론트엔드 리드 역할을 맡아 구조 설계와 리뷰 기준을 정리했습니다.",
     gradient: "from-rose-500 to-pink-500",
   },
-];
+  {
+    key: "global",
+    icon: Globe,
+    title: "서비스 확장성",
+    description:
+      "다국어, 권한 분리, 결제 정책 같은 확장 포인트를 초기에 구조화해 변경 비용을 줄였습니다.",
+    gradient: "from-emerald-500 to-teal-500",
+  },
+] as const;
+
+const domainCount = new Set(
+  projects.flatMap((project) => project.category.filter((value) => value !== "all"))
+).size;
+
+const collaborativeProjectCount = projects.filter(
+  (project) => !project.team.startsWith("1명")
+).length;
 
 const stats = [
-  { value: "3+", label: "년 경력", icon: "💼" },
-  { value: "20+", label: "완료 프로젝트", icon: "🚀" },
-  { value: "10+", label: "기술 스택", icon: "⚡" },
-  { value: "99%", label: "클라이언트 만족도", icon: "❤️" },
-];
+  { value: `${projects.length}개`, label: "등록 프로젝트", icon: "📁" },
+  { value: `${domainCount}개`, label: "주요 분야", icon: "🧭" },
+  { value: `${collaborativeProjectCount}개`, label: "협업 프로젝트", icon: "🤝" },
+  {
+    value: `${projects.filter((project) => project.featured).length}개`,
+    label: "Featured 프로젝트",
+    icon: "⭐",
+  },
+] as const;
 
 export function AboutPage() {
   return (
     <section className="min-h-screen px-6 pt-32 pb-20">
       <div className="max-w-6xl mx-auto">
         <SectionHeading
-          badge="ABOUT ME"
+          badge="ABOUT"
           title="개발자 소개"
-          description="끊임없이 배우고 성장하는 개발자입니다"
+          description={`${profile.name}의 개발 방식과 주요 작업 흐름을 소개합니다`}
         />
 
-        {/* Stats */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-20">
-          {stats.map((stat, i) => (
+          {stats.map((stat, index) => (
             <motion.div
-              key={i}
+              key={stat.label}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -5, transition: { duration: 0.15 } }}
               className="text-center p-6 md:p-8 rounded-2xl bg-card border border-border hover:border-emerald-500/20 transition-all group cursor-default"
             >
@@ -90,15 +109,14 @@ export function AboutPage() {
           ))}
         </div>
 
-        {/* Highlights */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {highlights.map((item, i) => (
+          {highlights.map((item, index) => (
             <motion.div
-              key={i}
+              key={item.key}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
+              transition={{ duration: 0.5, delay: index * 0.08 }}
             >
               <TiltCard className="h-full">
                 <div className="p-6 bg-card border border-border h-full rounded-2xl hover:border-emerald-500/20 transition-all group">
@@ -107,9 +125,7 @@ export function AboutPage() {
                   >
                     <item.icon className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-foreground mb-3 font-[Pretendard]">
-                    {item.title}
-                  </h3>
+                  <h3 className="text-foreground mb-3 font-[Pretendard]">{item.title}</h3>
                   <p className="text-muted-foreground text-[0.9rem] leading-[1.8] font-[Pretendard]">
                     {item.description}
                   </p>
