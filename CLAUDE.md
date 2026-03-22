@@ -38,39 +38,49 @@ src/
 ## Architecture & Key Patterns
 
 ### Data Management
+
 All content is centralized in `src/data/`:
+
 - `profile.ts` — Personal info, social links
 - `projects.ts` — Project array with metadata (`Project` interface)
 
 To add a new project, add an entry to the `projects` array in `projects.ts`.
 
 ### Routing
+
 Routes are defined in `App.tsx` using React Router `BrowserRouter`. Each page in `src/pages/` maps to a route.
 
 ### Dark Mode
+
 - Toggled by adding/removing the `dark` class on `document.documentElement`
 - Persisted to `localStorage`
 - System preference used as fallback on first load
 - Colors defined as CSS variables in `src/styles/theme.css`
 
 ### Theming (CSS Variables)
+
 Semantic color variables in `theme.css`:
+
 ```
 --background, --foreground
 --card, --card-foreground
 --accent, --muted, --border
 --primary, --secondary
 ```
+
 Light and dark values are defined separately under `:root` and `.dark`.
 
 ### Animations
+
 Uses the Motion library. Common patterns:
+
 - `whileInView` for scroll-triggered reveals
 - `whileHover` / `whileTap` for interaction
 - Spring physics (`stiffness`, `damping`) for natural motion
 - Staggered animations via incremental `transition.delay`
 
 ### Path Alias
+
 `@` resolves to `./src` (configured in both `vite.config.ts` and `tsconfig.app.json`).
 
 ## Component Conventions

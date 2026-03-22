@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 /** Simple Icons LinkedIn - lucide-react에서 브랜드 아이콘 제거 예정으로 직접 정의 */
 export function LinkedInIcon(props: SVGProps<SVGSVGElement>) {

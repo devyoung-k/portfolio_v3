@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { CursorGlow } from "@/components/CursorGlow";
-import { InteractiveBackground } from "@/components/InteractiveBackground";
-import { HomePage } from "@/pages/HomePage";
-import { AboutPage } from "@/pages/AboutPage";
-import { SkillsPage } from "@/pages/SkillsPage";
-import { ProjectsPage } from "@/pages/ProjectsPage";
-import { ProjectDetailPage } from "@/pages/ProjectDetailPage";
-import { ExperiencePage } from "@/pages/ExperiencePage";
-import { ContactPage } from "@/pages/ContactPage";
+import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router';
+import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
+import { CursorGlow } from '@/components/CursorGlow';
+import { InteractiveBackground } from '@/components/InteractiveBackground';
+import { HomePage } from '@/pages/HomePage';
+import { AboutPage } from '@/pages/AboutPage';
+import { SkillsPage } from '@/pages/SkillsPage';
+import { ProjectsPage } from '@/pages/ProjectsPage';
+import { ProjectDetailPage } from '@/pages/ProjectDetailPage';
+import { ExperiencePage } from '@/pages/ExperiencePage';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -41,7 +40,6 @@ function RootLayout({
           <Route path="/projects" element={<ProjectsPage />} />
           <Route path="/projects/:slug" element={<ProjectDetailPage />} />
           <Route path="/experience" element={<ExperiencePage />} />
-          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </main>
       <Footer />
@@ -51,17 +49,17 @@ function RootLayout({
 
 export default function App() {
   const [darkMode, setDarkMode] = useState(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("darkMode");
-      if (saved !== null) return saved === "true";
-      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('darkMode');
+      if (saved !== null) return saved === 'true';
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
     }
     return true;
   });
 
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", darkMode);
-    localStorage.setItem("darkMode", String(darkMode));
+    document.documentElement.classList.toggle('dark', darkMode);
+    localStorage.setItem('darkMode', String(darkMode));
   }, [darkMode]);
 
   const toggleDarkMode = () => setDarkMode((d) => !d);

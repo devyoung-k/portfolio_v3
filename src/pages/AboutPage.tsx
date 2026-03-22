@@ -1,78 +1,84 @@
-import { motion } from "motion/react";
-import { SectionHeading } from "@/components/SectionHeading";
-import { TiltCard } from "@/components/TiltCard";
-import { AnimatedCounter } from "@/components/AnimatedCounter";
-import { Code2, Workflow, Monitor, BellRing, Users, Globe } from "lucide-react";
-import { projects } from "@/data/projects";
-import { profile } from "@/data/profile";
+import { motion } from 'motion/react';
+import { SectionHeading } from '@/components/SectionHeading';
+import { TiltCard } from '@/components/TiltCard';
+import { AnimatedCounter } from '@/components/AnimatedCounter';
+import { Code2, Workflow, Monitor, BellRing, Users, Globe } from 'lucide-react';
+import { projects } from '@/data/projects';
+import { profile } from '@/data/profile';
 
 const highlights = [
   {
-    key: "problem-solving",
+    key: 'problem-solving',
     icon: Workflow,
-    title: "문제 중심 개발",
+    title: '문제 중심 개발',
     description:
-      "기능 구현 전에 문제와 실패 시나리오를 먼저 정리하고, 사용자 흐름 기준으로 우선순위를 결정합니다.",
-    gradient: "from-teal-500 to-blue-500",
+      '기능 구현 전에 문제와 실패 시나리오를 먼저 정리하고, 사용자 흐름 기준으로 우선순위를 결정합니다.',
+    gradient: 'from-teal-500 to-blue-500',
   },
   {
-    key: "frontend",
+    key: 'frontend',
     icon: Code2,
-    title: "프론트엔드 구현",
+    title: '프론트엔드 구현',
     description:
-      "React + TypeScript 기반으로 유지보수 가능한 구조를 만들고, 상태/비동기 흐름을 일관되게 다룹니다.",
-    gradient: "from-green-500 to-emerald-500",
+      'React + TypeScript 기반으로 유지보수 가능한 구조를 만들고, 상태/비동기 흐름을 일관되게 다룹니다.',
+    gradient: 'from-green-500 to-emerald-500',
   },
   {
-    key: "desktop",
+    key: 'desktop',
     icon: Monitor,
-    title: "데스크톱 앱 경험",
+    title: '데스크톱 앱 경험',
     description:
-      "Scriba, ID Card Generator처럼 Electron 앱을 개발하며 로컬 환경 제약과 성능 이슈를 직접 해결했습니다.",
-    gradient: "from-sky-500 to-blue-500",
+      'Scriba, ID Card Generator처럼 Electron 앱을 개발하며 로컬 환경 제약과 성능 이슈를 직접 해결했습니다.',
+    gradient: 'from-sky-500 to-blue-500',
   },
   {
-    key: "alerts",
+    key: 'alerts',
     icon: BellRing,
-    title: "운영 관점 설계",
+    title: '운영 관점 설계',
     description:
-      "APIGuard에서 알림 쿨다운과 실패 임계치를 설계해 운영 피로도를 낮추는 기능을 구현했습니다.",
-    gradient: "from-amber-500 to-orange-500",
+      'APIGuard에서 알림 쿨다운과 실패 임계치를 설계해 운영 피로도를 낮추는 기능을 구현했습니다.',
+    gradient: 'from-amber-500 to-orange-500',
   },
   {
-    key: "collaboration",
+    key: 'collaboration',
     icon: Users,
-    title: "협업 경험",
+    title: '협업 경험',
     description:
-      "Find It 프로젝트에서 프론트엔드 리드 역할을 맡아 구조 설계와 리뷰 기준을 정리했습니다.",
-    gradient: "from-rose-500 to-pink-500",
+      'Find It 프로젝트에서 프론트엔드 리드 역할을 맡아 구조 설계와 리뷰 기준을 정리했습니다.',
+    gradient: 'from-rose-500 to-pink-500',
   },
   {
-    key: "global",
+    key: 'global',
     icon: Globe,
-    title: "서비스 확장성",
+    title: '확장을 고려한 설계',
     description:
-      "다국어, 권한 분리, 결제 정책 같은 확장 포인트를 초기에 구조화해 변경 비용을 줄였습니다.",
-    gradient: "from-emerald-500 to-teal-500",
+      '새로운 기능을 붙이기 쉽도록 화면과 로직 구조를 나누어 개발했습니다.',
+    gradient: 'from-emerald-500 to-teal-500',
   },
 ] as const;
 
 const domainCount = new Set(
-  projects.flatMap((project) => project.category.filter((value) => value !== "all"))
+  projects.flatMap((project) =>
+    project.category.filter((value) => value !== 'all'),
+  ),
 ).size;
 
 const collaborativeProjectCount = projects.filter(
-  (project) => !project.team.startsWith("1명")
+  (project) => !project.team.startsWith('1명'),
 ).length;
 
 const stats = [
-  { value: `${projects.length}개`, label: "등록 프로젝트", icon: "📁" },
-  { value: `${domainCount}개`, label: "주요 분야", icon: "🧭" },
-  { value: `${collaborativeProjectCount}개`, label: "협업 프로젝트", icon: "🤝" },
+  { value: `${projects.length}개`, label: '등록 프로젝트', icon: '📁' },
+  { value: `${domainCount}개`, label: '주요 분야', icon: '🧭' },
+  {
+    value: `${collaborativeProjectCount}개`,
+    label: '협업 프로젝트',
+    icon: '🤝',
+  },
   {
     value: `${projects.filter((project) => project.featured).length}개`,
-    label: "Featured 프로젝트",
-    icon: "⭐",
+    label: 'Featured 프로젝트',
+    icon: '⭐',
   },
 ] as const;
 
@@ -125,7 +131,9 @@ export function AboutPage() {
                   >
                     <item.icon className="w-5 h-5 text-white" />
                   </div>
-                  <h3 className="text-foreground mb-3 font-[Pretendard]">{item.title}</h3>
+                  <h3 className="text-foreground mb-3 font-[Pretendard]">
+                    {item.title}
+                  </h3>
                   <p className="text-muted-foreground text-[0.9rem] leading-[1.8] font-[Pretendard]">
                     {item.description}
                   </p>

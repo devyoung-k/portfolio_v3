@@ -15,7 +15,6 @@ const navLinks = [
   { path: "/skills", label: "Skills" },
   { path: "/projects", label: "Projects" },
   { path: "/experience", label: "Experience" },
-  { path: "/contact", label: "Contact" },
 ];
 
 export function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {

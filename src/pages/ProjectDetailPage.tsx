@@ -1,5 +1,5 @@
-import { useParams, Link, useNavigate } from "react-router";
-import { motion } from "motion/react";
+import { useParams, Link, useNavigate } from 'react-router';
+import { motion } from 'motion/react';
 import {
   ArrowLeft,
   ExternalLink,
@@ -12,16 +12,68 @@ import {
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
-} from "lucide-react";
-import { GitHubIcon } from "@/components/icons";
-import { projects } from "@/data/projects";
-import { ImageWithFallback } from "@/components/ImageWithFallback";
-import { MagneticButton } from "@/components/MagneticButton";
+} from 'lucide-react';
+import { GitHubIcon } from '@/components/icons';
+import { projects } from '@/data/projects';
+import { ImageWithFallback } from '@/components/ImageWithFallback';
+import { MagneticButton } from '@/components/MagneticButton';
 
 const fadeUp = {
   initial: { opacity: 0, y: 30 },
   animate: { opacity: 1, y: 0 },
 };
+
+function DetailGroupSection({
+  title,
+  groups,
+}: {
+  title: string;
+  groups: { title: string; items: string[] }[];
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="mb-16"
+    >
+      <h2 className="text-foreground font-[Pretendard] text-[1.35rem] mb-6 flex items-center gap-2.5">
+        <div className="w-1 h-6 rounded-full bg-linear-to-b from-emerald-500 to-teal-500" />
+        {title}
+      </h2>
+      <div className="grid gap-5">
+        {groups.map((group, index) => (
+          <motion.div
+            key={`${group.title}-${index}`}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: index * 0.08 }}
+            className="rounded-2xl bg-card border border-border p-6"
+          >
+            <h3 className="text-foreground font-[Pretendard] mb-4">
+              {group.title}
+            </h3>
+            <div className="grid gap-3">
+              {group.items.map((item, itemIndex) => (
+                <div
+                  key={`${group.title}-${itemIndex}`}
+                  className="flex items-start gap-3"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                  <span className="text-muted-foreground text-[0.875rem] leading-[1.8] font-[Pretendard]">
+                    {item}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+}
 
 export function ProjectDetailPage() {
   const { slug } = useParams();
@@ -65,7 +117,7 @@ export function ProjectDetailPage() {
         <motion.div
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          transition={{ duration: 1.2, ease: 'easeOut' }}
           className="absolute inset-0"
         >
           <ImageWithFallback
@@ -85,7 +137,7 @@ export function ProjectDetailPage() {
           className="absolute top-6 left-6 z-20"
         >
           <button
-            onClick={() => navigate("/projects")}
+            onClick={() => navigate('/projects')}
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-black/30 backdrop-blur-md border border-white/10 text-white text-[0.85rem] hover:bg-black/50 transition-colors font-[Pretendard]"
           >
             <ArrowLeft className="w-4 h-4" />
@@ -131,9 +183,9 @@ export function ProjectDetailPage() {
           className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-12"
         >
           {[
-            { icon: Calendar, label: "기간", value: project.duration },
-            { icon: Users, label: "팀 구성", value: project.team },
-            { icon: Briefcase, label: "역할", value: project.role },
+            { icon: Calendar, label: '기간', value: project.duration },
+            { icon: Users, label: '팀 구성', value: project.team },
+            { icon: Briefcase, label: '역할', value: project.role },
           ].map((meta) => (
             <div
               key={meta.label}
@@ -158,32 +210,55 @@ export function ProjectDetailPage() {
         <motion.div
           {...fadeUp}
           transition={{ delay: 0.55 }}
-          className="flex flex-wrap gap-3 mb-12"
+          className="mb-12"
         >
-          {project.demo && (
-            <MagneticButton>
-              <a
-                href={project.demo}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-emerald-600 to-teal-600 text-white text-[0.875rem] hover:shadow-lg hover:shadow-emerald-500/25 transition-shadow font-[Pretendard]"
-              >
-                <ExternalLink className="w-4 h-4" />
-                Live Demo
-              </a>
-            </MagneticButton>
+          <div className="flex flex-wrap gap-3">
+            {project.demo && (
+              <MagneticButton>
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-linear-to-r from-emerald-600 to-teal-600 text-white text-[0.875rem] hover:shadow-lg hover:shadow-emerald-500/25 transition-shadow font-[Pretendard]"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  Live Demo
+                </a>
+              </MagneticButton>
+            )}
+            {project.repositoryLinks ? (
+              project.repositoryLinks.map((repo) => (
+                <MagneticButton key={repo.href}>
+                  <a
+                    href={repo.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground text-[0.875rem] hover:bg-accent/50 transition-all font-[Pretendard]"
+                  >
+                    <GitHubIcon className="w-4 h-4" />
+                    {repo.label}
+                  </a>
+                </MagneticButton>
+              ))
+            ) : (
+              <MagneticButton>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground text-[0.875rem] hover:bg-accent/50 transition-all font-[Pretendard]"
+                >
+                  <GitHubIcon className="w-4 h-4" />
+                  Source Code
+                </a>
+              </MagneticButton>
+            )}
+          </div>
+          {project.backendNote && (
+            <p className="mt-4 text-muted-foreground text-[0.85rem] leading-[1.8] font-[Pretendard]">
+              {project.backendNote}
+            </p>
           )}
-          <MagneticButton>
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-border text-foreground text-[0.875rem] hover:bg-accent/50 transition-all font-[Pretendard]"
-            >
-              <GitHubIcon className="w-4 h-4" />
-              Source Code
-            </a>
-          </MagneticButton>
         </motion.div>
 
         {/* Tech stack */}
@@ -207,12 +282,19 @@ export function ProjectDetailPage() {
         <motion.div {...fadeUp} transition={{ delay: 0.65 }} className="mb-16">
           <h2 className="text-foreground font-[Pretendard] text-[1.35rem] mb-5 flex items-center gap-2.5">
             <div className="w-1 h-6 rounded-full bg-linear-to-b from-emerald-500 to-teal-500" />
-            프로젝트 소개
+            프로젝트 개요
           </h2>
           <p className="text-muted-foreground text-[0.95rem] leading-loose font-[Pretendard]">
-            {project.longDescription}
+            {project.detail?.overview ?? project.longDescription}
           </p>
         </motion.div>
+
+        {project.detail?.responsibilities && (
+          <DetailGroupSection
+            title="내 역할"
+            groups={project.detail.responsibilities}
+          />
+        )}
 
         {/* Screenshots */}
         {project.screenshots.length > 0 && (
@@ -247,37 +329,43 @@ export function ProjectDetailPage() {
           </motion.div>
         )}
 
-        {/* Highlights */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="mb-16"
-        >
-          <h2 className="text-foreground font-[Pretendard] text-[1.35rem] mb-6 flex items-center gap-2.5">
-            <div className="w-1 h-6 rounded-full bg-linear-to-b from-emerald-500 to-teal-500" />
-            <Lightbulb className="w-5 h-5 text-emerald-500" />
-            주요 성과
-          </h2>
-          <div className="grid gap-3">
-            {project.highlights.map((item, i) => (
-              <motion.div
-                key={`${item}-${i}`}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.07 }}
-                className="flex items-start gap-3 px-5 py-4 rounded-xl bg-card border border-border hover:border-emerald-500/20 transition-colors group"
-              >
-                <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
-                <span className="text-muted-foreground text-[0.875rem] leading-[1.7] font-[Pretendard] group-hover:text-foreground transition-colors">
-                  {item}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        {project.detail?.implementations ? (
+          <DetailGroupSection
+            title="주요 구현"
+            groups={project.detail.implementations}
+          />
+        ) : (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-16"
+          >
+            <h2 className="text-foreground font-[Pretendard] text-[1.35rem] mb-6 flex items-center gap-2.5">
+              <div className="w-1 h-6 rounded-full bg-linear-to-b from-emerald-500 to-teal-500" />
+              <Lightbulb className="w-5 h-5 text-emerald-500" />
+              주요 성과
+            </h2>
+            <div className="grid gap-3">
+              {project.highlights.map((item, i) => (
+                <motion.div
+                  key={`${item}-${i}`}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.07 }}
+                  className="flex items-start gap-3 px-5 py-4 rounded-xl bg-card border border-border hover:border-emerald-500/20 transition-colors group"
+                >
+                  <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 shrink-0" />
+                  <span className="text-muted-foreground text-[0.875rem] leading-[1.7] font-[Pretendard] group-hover:text-foreground transition-colors">
+                    {item}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
 
         {/* Challenges & Solutions */}
         <motion.div

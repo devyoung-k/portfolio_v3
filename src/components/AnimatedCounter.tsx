@@ -1,18 +1,21 @@
-import { useEffect, useRef, useState } from "react";
-import { motion, useInView } from "motion/react";
+import { useEffect, useRef, useState } from 'react';
+import { motion, useInView } from 'motion/react';
 
 interface AnimatedCounterProps {
   value: string;
   className?: string;
 }
 
-export function AnimatedCounter({ value, className = "" }: AnimatedCounterProps) {
+export function AnimatedCounter({
+  value,
+  className = '',
+}: AnimatedCounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [display, setDisplay] = useState("0");
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+  const [display, setDisplay] = useState('0');
 
-  const numericPart = value.replace(/[^0-9]/g, "");
-  const suffix = value.replace(/[0-9]/g, "");
+  const numericPart = value.replace(/[^0-9]/g, '');
+  const suffix = value.replace(/[0-9]/g, '');
 
   useEffect(() => {
     if (!isInView) return;
@@ -39,7 +42,7 @@ export function AnimatedCounter({ value, className = "" }: AnimatedCounterProps)
       initial={{ opacity: 0, scale: 0.5 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5, type: "spring" }}
+      transition={{ duration: 0.5, type: 'spring' }}
     >
       {display}
     </motion.span>
