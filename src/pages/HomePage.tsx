@@ -1,18 +1,18 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router";
-import { motion } from "motion/react";
-import { ArrowRight, Mail, Terminal } from "lucide-react";
-import { MagneticButton } from "@/components/MagneticButton";
-import { TextReveal } from "@/components/TextReveal";
-import { GitHubIcon } from "@/components/icons";
-import { profile } from "@/data/profile";
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router';
+import { motion } from 'motion/react';
+import { ArrowRight, Terminal } from 'lucide-react';
+import { MagneticButton } from '@/components/MagneticButton';
+import { TextReveal } from '@/components/TextReveal';
+import { GitHubIcon } from '@/components/icons';
+import { profile } from '@/data/profile';
 
 const typewriterLines = [
-  "const developer = {",
-  `  name: \"${profile.name}\",`,
-  `  role: \"${profile.role}\",`,
-  "  buildsForUsers: true,",
-  "};",
+  'const developer = {',
+  `  name: "${profile.name}",`,
+  `  role: "${profile.role}",`,
+  '  buildsForUsers: true,',
+  '};',
 ];
 
 function TypeWriter() {
@@ -57,8 +57,8 @@ function TypeWriter() {
         {typewriterLines.map((line, index) => {
           if (index > currentLine) return null;
           const text = index < currentLine ? line : line.slice(0, currentChar);
-          const hasColon = text.includes(":");
-          const parts = hasColon ? text.split(":") : [text];
+          const hasColon = text.includes(':');
+          const parts = hasColon ? text.split(':') : [text];
 
           return (
             <div key={`${line}-${index}`} className="flex">
@@ -70,7 +70,9 @@ function TypeWriter() {
                   <>
                     <span className="text-teal-400">{parts[0]}</span>
                     <span className="text-white/60">:</span>
-                    <span className="text-amber-300">{parts.slice(1).join(":")}</span>
+                    <span className="text-amber-300">
+                      {parts.slice(1).join(':')}
+                    </span>
                   </>
                 ) : (
                   <span className="text-emerald-400">{text}</span>
@@ -88,27 +90,36 @@ function TypeWriter() {
 }
 
 const stacks = [
-  { label: "React", color: "bg-teal-500/15 text-teal-400 border-teal-500/20" },
-  { label: "TypeScript", color: "bg-blue-500/15 text-blue-400 border-blue-500/20" },
-  { label: "Next.js", color: "bg-white/10 text-white/70 border-white/10" },
-  { label: "Node.js", color: "bg-green-500/15 text-green-400 border-green-500/20" },
-  { label: "PostgreSQL", color: "bg-indigo-500/15 text-indigo-400 border-indigo-500/20" },
-  { label: "Docker", color: "bg-sky-500/15 text-sky-400 border-sky-500/20" },
+  { label: 'React', color: 'bg-teal-500/15 text-teal-400 border-teal-500/20' },
+  {
+    label: 'TypeScript',
+    color: 'bg-blue-500/15 text-blue-400 border-blue-500/20',
+  },
+  { label: 'Next.js', color: 'bg-white/10 text-white/70 border-white/10' },
+  {
+    label: 'Node.js',
+    color: 'bg-green-500/15 text-green-400 border-green-500/20',
+  },
+  {
+    label: 'PostgreSQL',
+    color: 'bg-indigo-500/15 text-indigo-400 border-indigo-500/20',
+  },
+  { label: 'Docker', color: 'bg-sky-500/15 text-sky-400 border-sky-500/20' },
 ];
 
 export function HomePage() {
-  const githubLink = profile.socials.find((social) => social.id === "github");
+  const githubLink = profile.socials.find((social) => social.id === 'github');
 
   return (
     <section className="min-h-screen flex items-center justify-center px-6 pt-20 pb-10 relative overflow-hidden">
       <motion.div
         animate={{ scale: [1, 1.2, 1], opacity: [0.12, 0.18, 0.12] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute top-1/4 left-1/4 w-125 h-125 bg-emerald-500 rounded-full blur-[160px] pointer-events-none"
       />
       <motion.div
         animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.15, 0.1] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
         className="absolute bottom-1/4 right-1/4 w-125 h-125 bg-teal-500 rounded-full blur-[160px] pointer-events-none"
       />
 
@@ -205,15 +216,19 @@ export function HomePage() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </MagneticButton>
-            <MagneticButton>
-              <Link
-                to="/contact"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-border text-foreground text-[0.9rem] hover:bg-accent/50 transition-all font-[Pretendard] backdrop-blur-sm"
-              >
-                <Mail className="w-4 h-4" />
-                연락하기
-              </Link>
-            </MagneticButton>
+            {githubLink && (
+              <MagneticButton>
+                <a
+                  href={githubLink.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-border text-foreground text-[0.9rem] hover:bg-accent/50 transition-all font-[Pretendard] backdrop-blur-sm"
+                >
+                  <GitHubIcon className="w-4 h-4" />
+                  GitHub 보기
+                </a>
+              </MagneticButton>
+            )}
           </motion.div>
 
           <motion.div

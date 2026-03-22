@@ -1,25 +1,25 @@
-import { useState } from "react";
-import { Link } from "react-router";
-import { motion, AnimatePresence } from "motion/react";
-import { SectionHeading } from "@/components/SectionHeading";
-import { TiltCard } from "@/components/TiltCard";
-import { ExternalLink, Star, ArrowUpRight } from "lucide-react";
-import { GitHubIcon } from "@/components/icons";
-import { ImageWithFallback } from "@/components/ImageWithFallback";
-import { projects, type ProjectCategory } from "@/data/projects";
+import { useState } from 'react';
+import { Link } from 'react-router';
+import { motion, AnimatePresence } from 'motion/react';
+import { SectionHeading } from '@/components/SectionHeading';
+import { TiltCard } from '@/components/TiltCard';
+import { ExternalLink, Star, ArrowUpRight } from 'lucide-react';
+import { GitHubIcon } from '@/components/icons';
+import { ImageWithFallback } from '@/components/ImageWithFallback';
+import { projects, type ProjectCategory } from '@/data/projects';
 
 const filterTabs: { key: ProjectCategory; label: string }[] = [
-  { key: "all", label: "전체" },
-  { key: "fullstack", label: "Full Stack" },
-  { key: "frontend", label: "Frontend" },
-  { key: "desktop", label: "Desktop" },
+  { key: 'all', label: '전체' },
+  { key: 'fullstack', label: 'Full Stack' },
+  { key: 'frontend', label: 'Frontend' },
+  { key: 'desktop', label: 'Desktop' },
 ];
 
 export function ProjectsPage() {
-  const [filter, setFilter] = useState<ProjectCategory>("all");
+  const [filter, setFilter] = useState<ProjectCategory>('all');
 
   const filtered =
-    filter === "all"
+    filter === 'all'
       ? projects
       : projects.filter((p) => p.category.includes(filter));
 
@@ -42,15 +42,15 @@ export function ProjectsPage() {
               whileTap={{ scale: 0.97 }}
               className={`relative px-5 py-2.5 rounded-xl text-[0.875rem] transition-all font-[Pretendard] ${
                 filter === tab.key
-                  ? "text-white shadow-lg shadow-emerald-500/20"
-                  : "bg-card border border-border text-muted-foreground hover:text-foreground"
+                  ? 'text-white shadow-lg shadow-emerald-500/20'
+                  : 'bg-card border border-border text-muted-foreground hover:text-foreground'
               }`}
             >
               {filter === tab.key && (
                 <motion.div
                   layoutId="project-tab-bg"
                   className="absolute inset-0 bg-linear-to-r from-emerald-600 to-teal-600 rounded-xl"
-                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                 />
               )}
               <span className="relative z-10">{tab.label}</span>
@@ -106,7 +106,7 @@ export function ProjectsPage() {
                             e.preventDefault();
                             e.stopPropagation();
                             if (!project.github) return;
-                            window.open(project.github, "_blank");
+                            window.open(project.github, '_blank');
                           }}
                           aria-label="Open GitHub"
                           className="w-9 h-9 rounded-lg bg-white/15 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/25 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
@@ -120,7 +120,7 @@ export function ProjectsPage() {
                             e.preventDefault();
                             e.stopPropagation();
                             if (!project.demo) return;
-                            window.open(project.demo, "_blank");
+                            window.open(project.demo, '_blank');
                           }}
                           aria-label="Open Live Demo"
                           className="w-9 h-9 rounded-lg bg-white/15 backdrop-blur-md flex items-center justify-center text-white hover:bg-white/25 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { motion } from "motion/react";
+import { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
 
 export function CursorGlow() {
   const [pos, setPos] = useState({ x: -200, y: -200 });
@@ -12,11 +12,11 @@ export function CursorGlow() {
     };
     const leave = () => setVisible(false);
 
-    window.addEventListener("mousemove", move);
-    document.addEventListener("mouseleave", leave);
+    window.addEventListener('mousemove', move);
+    document.addEventListener('mouseleave', leave);
     return () => {
-      window.removeEventListener("mousemove", move);
-      document.removeEventListener("mouseleave", leave);
+      window.removeEventListener('mousemove', move);
+      document.removeEventListener('mouseleave', leave);
     };
   }, []);
 
@@ -28,7 +28,7 @@ export function CursorGlow() {
         y: pos.y - 200,
         opacity: visible ? 1 : 0,
       }}
-      transition={{ type: "spring", damping: 30, stiffness: 200, mass: 0.5 }}
+      transition={{ type: 'spring', damping: 30, stiffness: 200, mass: 0.5 }}
     >
       <div className="w-100 h-100 rounded-full bg-gradient-radial from-emerald-500/8 via-teal-500/4 to-transparent blur-2xl" />
     </motion.div>
