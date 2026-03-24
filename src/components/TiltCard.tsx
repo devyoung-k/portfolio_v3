@@ -1,12 +1,12 @@
-import { useRef, useState, type ReactNode } from "react";
-import { motion } from "motion/react";
+import { useRef, useState, type ReactNode } from 'react';
+import { motion } from 'motion/react';
 
 interface TiltCardProps {
   children: ReactNode;
   className?: string;
 }
 
-export function TiltCard({ children, className = "" }: TiltCardProps) {
+export function TiltCard({ children, className = '' }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [rotate, setRotate] = useState({ x: 0, y: 0 });
   const [glare, setGlare] = useState({ x: 50, y: 50, opacity: 0 });
@@ -39,8 +39,8 @@ export function TiltCard({ children, className = "" }: TiltCardProps) {
         rotateX: rotate.x,
         rotateY: rotate.y,
       }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      style={{ perspective: 800, transformStyle: "preserve-3d" }}
+      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      style={{ perspective: 800, transformStyle: 'preserve-3d' }}
       className={className}
     >
       <div className="relative overflow-hidden rounded-2xl h-full">

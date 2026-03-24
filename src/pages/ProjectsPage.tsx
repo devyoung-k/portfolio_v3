@@ -12,7 +12,6 @@ const filterTabs: { key: ProjectCategory; label: string }[] = [
   { key: 'all', label: '전체' },
   { key: 'fullstack', label: 'Full Stack' },
   { key: 'frontend', label: 'Frontend' },
-  { key: 'desktop', label: 'Desktop' },
 ];
 
 export function ProjectsPage() {

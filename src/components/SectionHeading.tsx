@@ -1,5 +1,5 @@
-import { motion } from "motion/react";
-import { TextReveal } from "./TextReveal";
+import { motion } from 'motion/react';
+import { TextReveal } from './TextReveal';
 
 interface SectionHeadingProps {
   badge: string;
@@ -7,13 +7,17 @@ interface SectionHeadingProps {
   description?: string;
 }
 
-export function SectionHeading({ badge, title, description }: SectionHeadingProps) {
+export function SectionHeading({
+  badge,
+  title,
+  description,
+}: SectionHeadingProps) {
   return (
     <div className="text-center mb-20">
       <motion.span
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
+        viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.4 }}
         className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-500 text-[0.8rem] mb-5 font-mono tracking-wider"
       >
@@ -29,7 +33,7 @@ export function SectionHeading({ badge, title, description }: SectionHeadingProp
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5, delay: 0.3 }}
           className="text-muted-foreground max-w-xl mx-auto text-[1rem] font-[Pretendard] leading-relaxed"
         >

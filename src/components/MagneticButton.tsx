@@ -1,5 +1,5 @@
-import { useRef, useState, type ReactNode } from "react";
-import { motion } from "motion/react";
+import { useRef, useState, type ReactNode } from 'react';
+import { motion } from 'motion/react';
 
 interface MagneticButtonProps {
   children: ReactNode;
@@ -9,7 +9,7 @@ interface MagneticButtonProps {
 
 export function MagneticButton({
   children,
-  className = "",
+  className = '',
   onClick,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -32,7 +32,7 @@ export function MagneticButton({
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
       animate={{ x: position.x, y: position.y }}
-      transition={{ type: "spring", stiffness: 200, damping: 15, mass: 0.5 }}
+      transition={{ type: 'spring', stiffness: 200, damping: 15, mass: 0.5 }}
       className={`inline-block ${className}`}
       onClick={onClick}
     >

@@ -24,11 +24,11 @@ const highlights = [
     gradient: 'from-green-500 to-emerald-500',
   },
   {
-    key: 'desktop',
+    key: 'ai',
     icon: Monitor,
-    title: '데스크톱 앱 경험',
+    title: 'AI 서비스 구축',
     description:
-      'Scriba, ID Card Generator처럼 Electron 앱을 개발하며 로컬 환경 제약과 성능 이슈를 직접 해결했습니다.',
+      'Brevoca에서 OpenAI STT/GPT 파이프라인을 설계하고, 프롬프트 엔지니어링으로 회의록 품질을 개선했습니다.',
     gradient: 'from-sky-500 to-blue-500',
   },
   {

@@ -1,8 +1,7 @@
-import { useState, useEffect, useCallback } from "react";
-import { Link, useLocation } from "react-router";
-import { Menu, X, Moon, Sun, Code2 } from "lucide-react";
-import { motion, AnimatePresence, useScroll, useSpring } from "motion/react";
-import { profile } from "@/data/profile";
+import { useState, useEffect, useCallback } from 'react';
+import { Link, useLocation } from 'react-router';
+import { Menu, X, Moon, Sun } from 'lucide-react';
+import { motion, AnimatePresence, useScroll, useSpring } from 'motion/react';
 
 interface NavbarProps {
   darkMode: boolean;
@@ -10,11 +9,11 @@ interface NavbarProps {
 }
 
 const navLinks = [
-  { path: "/", label: "Home" },
-  { path: "/about", label: "About" },
-  { path: "/skills", label: "Skills" },
-  { path: "/projects", label: "Projects" },
-  { path: "/experience", label: "Experience" },
+  { path: '/', label: 'Home' },
+  { path: '/about', label: 'About' },
+  { path: '/skills', label: 'Skills' },
+  { path: '/projects', label: 'Projects' },
+  { path: '/experience', label: 'Experience' },
 ];
 
 export function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
@@ -30,16 +29,16 @@ export function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/80 backdrop-blur-xl border-b border-border shadow-sm"
-          : "bg-transparent"
+          ? 'bg-background/80 backdrop-blur-xl border-b border-border shadow-sm'
+          : 'bg-transparent'
       }`}
     >
       {/* Scroll progress bar */}
@@ -49,16 +48,9 @@ export function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
       />
 
       <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2.5 group">
-          <motion.div
-            whileHover={{ rotate: 180 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="w-9 h-9 rounded-lg bg-linear-to-br from-emerald-500 to-teal-500 flex items-center justify-center"
-          >
-            <Code2 className="w-5 h-5 text-white" />
-          </motion.div>
-          <span className="text-foreground font-[Pretendard] tracking-tight">
-            {profile.englishName}
+        <Link to="/" className="flex items-center group">
+          <span className="text-lg font-bold font-[Fira_Code] tracking-tight text-foreground">
+            devyoung
           </span>
         </Link>
 
@@ -74,14 +66,14 @@ export function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
                 <motion.span
                   layoutId="nav-active"
                   className="absolute inset-0 rounded-lg bg-accent"
-                  transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 25 }}
                 />
               )}
               <span
                 className={`relative z-10 ${
                   location.pathname === link.path
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? 'text-foreground'
+                    : 'text-muted-foreground hover:text-foreground'
                 }`}
               >
                 {link.label}
@@ -96,7 +88,7 @@ export function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
           >
             <AnimatePresence mode="wait">
               <motion.div
-                key={darkMode ? "sun" : "moon"}
+                key={darkMode ? 'sun' : 'moon'}
                 initial={{ scale: 0, rotate: -90 }}
                 animate={{ scale: 1, rotate: 0 }}
                 exit={{ scale: 0, rotate: 90 }}
@@ -128,11 +120,7 @@ export function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
             onClick={() => setIsOpen(!isOpen)}
             className="p-2 rounded-lg hover:bg-accent transition-colors text-muted-foreground"
           >
-            {isOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
@@ -142,7 +130,7 @@ export function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
         {isOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
+            animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border overflow-hidden"
           >
@@ -159,8 +147,8 @@ export function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
                     onClick={closeMenu}
                     className={`block px-4 py-3 rounded-lg transition-colors font-[Pretendard] text-[0.875rem] ${
                       location.pathname === link.path
-                        ? "text-foreground bg-accent"
-                        : "text-muted-foreground hover:text-foreground hover:bg-accent/50"
+                        ? 'text-foreground bg-accent'
+                        : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
                     }`}
                   >
                     {link.label}
