@@ -17,8 +17,8 @@ export const profile = {
     {
       id: 'github',
       label: 'GitHub',
-      value: 'github.com/ksyee',
-      href: 'https://github.com/ksyee',
+      value: 'github.com/devyoung-k',
+      href: 'https://github.com/devyoung-k',
     },
   ] as const satisfies readonly SocialLink[],
 };

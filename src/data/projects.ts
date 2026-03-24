@@ -62,7 +62,7 @@ export const projects: Project[] = [
       'GitHub Actions',
     ],
     category: ['fullstack'],
-    github: 'https://github.com/ksyee/apiguard-frontend',
+    github: 'https://github.com/devyoung-k/apiguard-frontend',
     demo: '',
     featured: true,
     role: 'Frontend Developer with Backend Contributions',
@@ -71,11 +71,11 @@ export const projects: Project[] = [
     repositoryLinks: [
       {
         label: 'Frontend Repo',
-        href: 'https://github.com/ksyee/apiguard-frontend',
+        href: 'https://github.com/devyoung-k/apiguard-frontend',
       },
       {
         label: 'Backend Repo',
-        href: 'https://github.com/ksyee/apiguard-backend',
+        href: 'https://github.com/devyoung-k/apiguard-backend',
       },
     ],
     backendNote:
@@ -174,7 +174,7 @@ export const projects: Project[] = [
       'Vercel',
     ],
     category: ['fullstack'],
-    github: 'https://github.com/ksyee/find-it',
+    github: 'https://github.com/devyoung-k/find-it',
     demo: '',
     featured: true,
     role: 'Frontend Developer with Backend Contributions',
@@ -183,11 +183,11 @@ export const projects: Project[] = [
     repositoryLinks: [
       {
         label: 'Frontend Repo',
-        href: 'https://github.com/ksyee/find-it',
+        href: 'https://github.com/devyoung-k/find-it',
       },
       {
         label: 'Backend Repo (Private)',
-        href: 'https://github.com/ksyee/findit-server',
+        href: 'https://github.com/devyoung-k/findit-server',
       },
     ],
     backendNote:
@@ -293,7 +293,7 @@ export const projects: Project[] = [
     screenshots: [],
     tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Zustand'],
     category: ['frontend'],
-    github: 'https://github.com/ksyee/k-type',
+    github: 'https://github.com/devyoung-k/k-type',
     demo: '',
     featured: false,
     role: 'Solo Developer',
@@ -335,7 +335,7 @@ export const projects: Project[] = [
       'OpenAI API',
     ],
     category: ['fullstack'],
-    github: 'https://github.com/ksyee/Scriba',
+    github: 'https://github.com/devyoung-k/Brevoca',
     demo: '',
     featured: true,
     role: 'Solo Developer',
