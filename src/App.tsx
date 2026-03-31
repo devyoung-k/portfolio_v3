@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router';
+import { Analytics } from '@vercel/analytics/react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { CursorGlow } from '@/components/CursorGlow';
@@ -67,6 +68,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <RootLayout darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+      <Analytics />
     </BrowserRouter>
   );
 }
