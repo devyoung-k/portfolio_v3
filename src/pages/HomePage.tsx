@@ -122,7 +122,7 @@ export function HomePage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-foreground font-[Pretendard] text-[2.5rem] md:text-[3.25rem] leading-[1.2] mb-6"
+            className="text-foreground font-[Pretendard] text-display mb-6"
           >
             안녕하세요,
             <br />

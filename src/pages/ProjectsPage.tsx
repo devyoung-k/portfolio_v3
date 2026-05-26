@@ -60,7 +60,9 @@ export function ProjectsPage() {
         {/* Project Grid */}
         <div className="grid md:grid-cols-2 gap-7">
           <AnimatePresence mode="popLayout">
-            {filtered.map((project, i) => (
+            {filtered.map((project, i) => {
+              const isHero = i === 0 && project.featured;
+              return (
               <motion.div
                 key={project.id}
                 layout
@@ -68,15 +70,16 @@ export function ProjectsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.35, delay: i * 0.06 }}
+                className={isHero ? 'md:col-span-2' : ''}
               >
                   <Link
                     to={`/projects/${project.slug}`}
                     className="block bg-card border border-border rounded-2xl overflow-hidden group hover:border-foreground/20 transition-colors"
                   >
-                    <div className="relative h-52 overflow-hidden border-b border-border">
+                    <div className={`relative ${isHero ? 'h-72 md:h-80' : 'h-52'} overflow-hidden border-b border-border`}>
                       <ProjectThumbnail
                         slug={project.slug}
-                        className="absolute inset-0"
+                        className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.03] group-hover:-translate-y-1"
                       />
 
                       {project.featured && (
@@ -149,7 +152,8 @@ export function ProjectsPage() {
                     </div>
                   </Link>
               </motion.div>
-            ))}
+              );
+            })}
           </AnimatePresence>
         </div>
       </div>

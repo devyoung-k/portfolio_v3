@@ -34,7 +34,7 @@ function DetailGroupSection({
       transition={{ duration: 0.5 }}
       className="mb-16"
     >
-      <h2 className="text-foreground font-[Pretendard] text-[1.35rem] mb-8 flex items-center gap-2.5">
+      <h2 className="text-foreground font-[Pretendard] text-section mb-8 flex items-center gap-2.5">
         <div className="w-1 h-6 rounded-full bg-foreground/40" />
         {title}
       </h2>
@@ -88,7 +88,7 @@ export function ProjectDetailPage() {
             <p className="text-muted-foreground font-mono text-[0.7rem] tracking-[0.2em] mb-4">
               404 · NOT FOUND
             </p>
-            <h1 className="text-foreground font-[Pretendard] text-[2rem] md:text-[2.5rem] leading-tight mb-4">
+            <h1 className="text-foreground font-[Pretendard] text-title mb-4">
               프로젝트를 찾을 수 없습니다.
             </h1>
             <p className="text-muted-foreground text-[0.95rem] leading-[1.8] mb-10 font-[Pretendard]">
@@ -173,7 +173,7 @@ export function ProjectDetailPage() {
         <motion.h1
           {...fadeUp}
           transition={{ delay: 0.1 }}
-          className="text-foreground font-[Pretendard] text-[2rem] md:text-[3rem] leading-[1.15] mb-6"
+          className="text-foreground font-[Pretendard] text-display mb-6"
         >
           {project.title}
         </motion.h1>
@@ -292,7 +292,7 @@ export function ProjectDetailPage() {
 
         {/* Description */}
         <motion.div {...fadeUp} transition={{ delay: 0.65 }} className="mb-16">
-          <h2 className="text-foreground font-[Pretendard] text-[1.35rem] mb-5 flex items-center gap-2.5">
+          <h2 className="text-foreground font-[Pretendard] text-section mb-5 flex items-center gap-2.5">
             <div className="w-1 h-6 rounded-full bg-foreground/40" />
             프로젝트 개요
           </h2>
@@ -316,7 +316,7 @@ export function ProjectDetailPage() {
             viewport={{ once: true }}
             className="mb-16"
           >
-            <h2 className="text-foreground font-[Pretendard] text-[1.35rem] mb-5 flex items-center gap-2.5">
+            <h2 className="text-foreground font-[Pretendard] text-section mb-5 flex items-center gap-2.5">
               <div className="w-1 h-6 rounded-full bg-foreground/40" />
               스크린샷
             </h2>
@@ -354,7 +354,7 @@ export function ProjectDetailPage() {
             transition={{ duration: 0.5 }}
             className="mb-16"
           >
-            <h2 className="text-foreground font-[Pretendard] text-[1.35rem] mb-8 flex items-center gap-2.5">
+            <h2 className="text-foreground font-[Pretendard] text-section mb-8 flex items-center gap-2.5">
               <div className="w-1 h-6 rounded-full bg-foreground/40" />
               주요 성과
             </h2>
@@ -383,7 +383,7 @@ export function ProjectDetailPage() {
           transition={{ duration: 0.5 }}
           className="mb-16"
         >
-          <h2 className="text-foreground font-[Pretendard] text-[1.35rem] mb-6 flex items-center gap-2.5">
+          <h2 className="text-foreground font-[Pretendard] text-section mb-6 flex items-center gap-2.5">
             <div className="w-1 h-6 rounded-full bg-foreground/40" />
             <AlertTriangle className="w-5 h-5 text-amber-500" />
             도전 과제 & 해결

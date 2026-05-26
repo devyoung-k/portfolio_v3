@@ -34,7 +34,7 @@ export function SectionHeading({
       </motion.span>
       <TextReveal
         as="h2"
-        className="text-foreground font-[Pretendard] text-[2rem] md:text-[2.5rem] mb-5 leading-tight"
+        className="text-foreground font-[Pretendard] text-title mb-5"
       >
         {title}
       </TextReveal>

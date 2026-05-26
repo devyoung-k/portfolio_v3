@@ -23,21 +23,24 @@ const highlights = [
     icon: Monitor,
     title: 'AI 서비스 구축',
     description:
-      'Brevoca에서 OpenAI STT/GPT 파이프라인을 설계하고, 프롬프트 엔지니어링으로 회의록 품질을 개선했습니다.',
+      'OpenAI STT/GPT 파이프라인을 설계하고, 프롬프트 엔지니어링으로 회의록 품질을 개선했습니다.',
+    source: 'Brevoca',
   },
   {
     key: 'alerts',
     icon: BellRing,
     title: '운영 관점 설계',
     description:
-      'APIGuard에서 알림 쿨다운과 실패 임계치를 설계해 운영 피로도를 낮추는 기능을 구현했습니다.',
+      '알림 쿨다운과 실패 임계치를 설계해 운영 피로도를 낮추는 기능을 구현했습니다.',
+    source: 'APIGuard',
   },
   {
     key: 'collaboration',
     icon: Users,
     title: '협업 경험',
     description:
-      'Find It 프로젝트에서 프론트엔드 리드 역할을 맡아 구조 설계와 리뷰 기준을 정리했습니다.',
+      '프론트엔드 리드 역할을 맡아 구조 설계와 리뷰 기준을 정리했습니다.',
+    source: 'Find It',
   },
   {
     key: 'global',
@@ -70,7 +73,14 @@ export function AboutPage() {
               transition={{ duration: 0.5, delay: index * 0.06 }}
               className="group"
             >
-              <item.icon className="w-5 h-5 text-foreground/70 mb-5 group-hover:text-foreground transition-colors" />
+              <div className="flex items-start justify-between gap-3 mb-5">
+                <item.icon className="w-5 h-5 text-foreground/70 group-hover:text-foreground transition-colors" />
+                {'source' in item && item.source && (
+                  <span className="text-[0.65rem] font-mono tracking-wider text-muted-foreground/70 mt-1">
+                    ↳ {item.source}
+                  </span>
+                )}
+              </div>
               <h3 className="text-foreground mb-3 font-[Pretendard]">
                 {item.title}
               </h3>

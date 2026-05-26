@@ -160,6 +160,33 @@
   background: radial-gradient(circle, var(--tw-gradient-stops));
 }
 
+/* Semantic type scale — use these classes instead of inline text-[...] sizes */
+.text-display {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.text-title {
+  font-size: 2rem;
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+}
+
+.text-section {
+  font-size: 1.35rem;
+  line-height: 1.4;
+}
+
+@media (min-width: 768px) {
+  .text-display {
+    font-size: 3.25rem;
+  }
+  .text-title {
+    font-size: 2.5rem;
+  }
+}
+
 @keyframes shimmer {
   0% {
     transform: translateX(-100%);
