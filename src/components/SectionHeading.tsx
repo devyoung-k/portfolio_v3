@@ -5,27 +5,33 @@ interface SectionHeadingProps {
   badge: string;
   title: string;
   description?: string;
+  sequence?: string;
 }
 
 export function SectionHeading({
   badge,
   title,
   description,
+  sequence,
 }: SectionHeadingProps) {
   return (
     <div className="text-center mb-20">
       <motion.span
-        initial={{ opacity: 0, scale: 0.8 }}
-        whileInView={{ opacity: 1, scale: 1 }}
+        initial={{ opacity: 0, y: 8 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.4 }}
-        className="inline-block px-4 py-1.5 rounded-full bg-emerald-500/10 text-emerald-500 text-[0.8rem] mb-5 font-mono tracking-wider"
+        className="inline-flex items-baseline gap-2 text-muted-foreground text-[0.75rem] mb-6 font-mono tracking-[0.2em]"
       >
-        {badge}
+        {sequence && (
+          <span className="text-foreground/40">{sequence}</span>
+        )}
+        {sequence && <span className="text-foreground/30">/</span>}
+        <span>{badge}</span>
       </motion.span>
       <TextReveal
         as="h2"
-        className="text-foreground font-[Pretendard] text-[2rem] md:text-[2.5rem] mb-5 leading-snug"
+        className="text-foreground font-[Pretendard] text-[2rem] md:text-[2.5rem] mb-5 leading-tight"
       >
         {title}
       </TextReveal>

@@ -43,7 +43,7 @@ export function Navbar({ darkMode, toggleDarkMode }: NavbarProps) {
     >
       {/* Scroll progress bar */}
       <motion.div
-        className="absolute bottom-0 left-0 h-0.5 bg-linear-to-r from-emerald-500 to-teal-500 origin-left"
+        className="absolute bottom-0 left-0 h-0.5 bg-brand origin-left"
         style={{ scaleX }}
       />
 

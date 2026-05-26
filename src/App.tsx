@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router';
+import { MotionConfig } from 'motion/react';
 import { Analytics } from '@vercel/analytics/react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import { CursorGlow } from '@/components/CursorGlow';
 import { InteractiveBackground } from '@/components/InteractiveBackground';
 import { HomePage } from '@/pages/HomePage';
 import { AboutPage } from '@/pages/AboutPage';
@@ -29,7 +29,6 @@ function RootLayout({
 }) {
   return (
     <div className="relative min-h-screen flex flex-col">
-      <CursorGlow />
       <InteractiveBackground />
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
       <main className="flex-1 relative z-10">
@@ -67,8 +66,10 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <RootLayout darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <Analytics />
+      <MotionConfig reducedMotion="user">
+        <RootLayout darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
+        <Analytics />
+      </MotionConfig>
     </BrowserRouter>
   );
 }

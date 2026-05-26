@@ -124,7 +124,7 @@ function TimelineCard({ item, index }: { item: TimelineItem; index: number }) {
       >
         <motion.div
           whileHover={{ y: -3 }}
-          className="p-6 rounded-2xl bg-card border border-border hover:border-emerald-500/20 transition-all group"
+          className="p-6 rounded-2xl bg-card border border-border hover:border-foreground/20 transition-all group"
         >
           <div className="flex items-center gap-2 mb-3">
             <span
@@ -140,7 +140,7 @@ function TimelineCard({ item, index }: { item: TimelineItem; index: number }) {
           <h3 className="text-foreground font-[Pretendard] mb-1">
             {item.title}
           </h3>
-          <p className="text-emerald-500/80 text-[0.85rem] mb-3 font-[Pretendard]">
+          <p className="text-muted-foreground text-[0.85rem] mb-3 font-[Pretendard]">
             {item.subtitle}
           </p>
           <p className="text-muted-foreground text-[0.875rem] leading-[1.8] font-[Pretendard]">
@@ -152,7 +152,7 @@ function TimelineCard({ item, index }: { item: TimelineItem; index: number }) {
               {item.tags.map((tag) => (
                 <span
                   key={`${item.title}-${tag}`}
-                  className="px-2.5 py-1 rounded-md bg-accent/60 text-muted-foreground text-[0.7rem] font-mono"
+                  className="px-2.5 py-1 rounded-md border border-border bg-card/40 text-muted-foreground text-[0.7rem] font-mono"
                 >
                   {tag}
                 </span>
@@ -178,6 +178,7 @@ export function ExperiencePage() {
     <section className="min-h-screen px-6 pt-32 pb-20">
       <div className="max-w-4xl mx-auto">
         <SectionHeading
+          sequence="04"
           badge="TIMELINE"
           title="경험 타임라인"
           description="경력과 교육 이력을 시간순으로 정리했습니다"
@@ -186,7 +187,7 @@ export function ExperiencePage() {
         <div ref={containerRef} className="relative">
           <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-border/40 md:-translate-x-px" />
           <motion.div
-            className="absolute left-6 md:left-1/2 top-0 w-px bg-linear-to-b from-emerald-500 to-teal-500 md:-translate-x-px origin-top"
+            className="absolute left-6 md:left-1/2 top-0 w-px bg-foreground/50 md:-translate-x-px origin-top"
             style={{ height: lineHeight }}
           />
 
@@ -196,7 +197,7 @@ export function ExperiencePage() {
         </div>
 
         <div className="mt-10 p-5 rounded-xl bg-card border border-border flex items-center gap-3">
-          <Rocket className="w-4 h-4 text-emerald-500 shrink-0" />
+          <Rocket className="w-4 h-4 text-muted-foreground shrink-0" />
           <p className="text-muted-foreground text-[0.85rem] font-[Pretendard] leading-relaxed">
             실제 경험한 업무와 프로젝트, 해결한 문제 중심으로 이력을
             정리했습니다.

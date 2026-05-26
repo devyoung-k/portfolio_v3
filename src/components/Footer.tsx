@@ -1,5 +1,4 @@
 import { GitHubIcon } from './icons';
-import { MagneticButton } from './MagneticButton';
 import { profile } from '@/data/profile';
 
 export function Footer() {
@@ -14,17 +13,15 @@ export function Footer() {
           </p>
           <div className="flex items-center gap-3">
             {githubLink && (
-              <MagneticButton>
-                <a
-                  href={githubLink.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label="GitHub"
-                  className="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:text-emerald-500 hover:border-emerald-500/30 transition-all"
-                >
-                  <GitHubIcon className="w-4 h-4" />
-                </a>
-              </MagneticButton>
+              <a
+                href={githubLink.href}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub"
+                className="w-9 h-9 rounded-lg border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 transition-colors"
+              >
+                <GitHubIcon className="w-4 h-4" />
+              </a>
             )}
           </div>
         </div>

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { motion } from 'motion/react';
 import { ArrowRight, Terminal } from 'lucide-react';
-import { MagneticButton } from '@/components/MagneticButton';
 import { TextReveal } from '@/components/TextReveal';
 import { GitHubIcon } from '@/components/icons';
 import { profile } from '@/data/profile';
@@ -40,7 +39,7 @@ function TypeWriter() {
   }, [currentLine, currentChar, done]);
 
   return (
-    <div className="rounded-2xl bg-[#0f1a1f] border border-white/5 overflow-hidden shadow-2xl shadow-emerald-500/5">
+    <div className="rounded-2xl bg-[#0f1a1f] border border-white/5 overflow-hidden shadow-2xl shadow-black/20">
       <div className="px-4 py-3 bg-white/5 flex items-center gap-2">
         <div className="flex gap-1.5">
           <span className="w-3 h-3 rounded-full bg-red-400/80" />
@@ -68,17 +67,17 @@ function TypeWriter() {
               <span className="whitespace-pre">
                 {hasColon ? (
                   <>
-                    <span className="text-teal-400">{parts[0]}</span>
+                    <span className="text-sky-300">{parts[0]}</span>
                     <span className="text-white/60">:</span>
                     <span className="text-amber-300">
                       {parts.slice(1).join(':')}
                     </span>
                   </>
                 ) : (
-                  <span className="text-emerald-400">{text}</span>
+                  <span className="text-white/80">{text}</span>
                 )}
                 {index === currentLine && !done && (
-                  <span className="inline-block w-0.5 h-[1em] bg-emerald-400 ml-px animate-pulse align-middle" />
+                  <span className="inline-block w-0.5 h-[1em] bg-white/80 ml-px animate-pulse align-middle" />
                 )}
               </span>
             </div>
@@ -90,21 +89,12 @@ function TypeWriter() {
 }
 
 const stacks = [
-  { label: 'React', color: 'bg-teal-500/15 text-teal-400 border-teal-500/20' },
-  {
-    label: 'TypeScript',
-    color: 'bg-blue-500/15 text-blue-400 border-blue-500/20',
-  },
-  { label: 'Next.js', color: 'bg-white/10 text-white/70 border-white/10' },
-  {
-    label: 'Node.js',
-    color: 'bg-green-500/15 text-green-400 border-green-500/20',
-  },
-  {
-    label: 'PostgreSQL',
-    color: 'bg-indigo-500/15 text-indigo-400 border-indigo-500/20',
-  },
-  { label: 'Docker', color: 'bg-sky-500/15 text-sky-400 border-sky-500/20' },
+  { label: 'React' },
+  { label: 'TypeScript' },
+  { label: 'Next.js' },
+  { label: 'Node.js' },
+  { label: 'PostgreSQL' },
+  { label: 'Docker' },
 ];
 
 export function HomePage() {
@@ -112,17 +102,6 @@ export function HomePage() {
 
   return (
     <section className="min-h-screen flex items-center justify-center px-6 pt-20 pb-10 relative overflow-hidden">
-      <motion.div
-        animate={{ scale: [1, 1.2, 1], opacity: [0.12, 0.18, 0.12] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute top-1/4 left-1/4 w-125 h-125 bg-emerald-500 rounded-full blur-[160px] pointer-events-none"
-      />
-      <motion.div
-        animate={{ scale: [1.2, 1, 1.2], opacity: [0.1, 0.15, 0.1] }}
-        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-1/4 right-1/4 w-125 h-125 bg-teal-500 rounded-full blur-[160px] pointer-events-none"
-      />
-
       <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-2 gap-16 items-center relative z-10">
         <div>
           <motion.div
@@ -150,7 +129,7 @@ export function HomePage() {
           <TextReveal
             as="h1"
             delay={0.2}
-            className="font-[Pretendard] text-[2.5rem] md:text-[3.25rem] leading-[1.15] bg-linear-to-r from-emerald-500 via-emerald-500 to-teal-500 bg-clip-text text-transparent"
+            className="text-foreground font-[Pretendard] text-[2.5rem] md:text-[3.25rem] leading-[1.15]"
           >
             {profile.heroRole}
           </TextReveal>
@@ -190,11 +169,10 @@ export function HomePage() {
             {stacks.map((stack, index) => (
               <motion.span
                 key={stack.label}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.8 + index * 0.06 }}
-                whileHover={{ scale: 1.08, y: -2 }}
-                className={`px-3 py-1.5 rounded-lg border text-[0.75rem] font-mono cursor-default ${stack.color}`}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 + index * 0.04 }}
+                className="px-3 py-1.5 rounded-md border border-border bg-card/40 text-muted-foreground text-[0.75rem] font-mono cursor-default"
               >
                 {stack.label}
               </motion.span>
@@ -207,27 +185,23 @@ export function HomePage() {
             transition={{ duration: 0.5, delay: 0.9 }}
             className="flex flex-wrap gap-3 mb-10"
           >
-            <MagneticButton>
-              <Link
-                to="/projects"
-                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-linear-to-r from-emerald-600 to-teal-600 text-white text-[0.9rem] hover:shadow-lg hover:shadow-emerald-500/25 transition-shadow font-[Pretendard]"
-              >
-                프로젝트 보기
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </MagneticButton>
+            <Link
+              to="/projects"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-brand text-brand-foreground text-[0.9rem] hover:shadow-lg hover:shadow-brand/25 transition-shadow font-[Pretendard]"
+            >
+              프로젝트 보기
+              <ArrowRight className="w-4 h-4" />
+            </Link>
             {githubLink && (
-              <MagneticButton>
-                <a
-                  href={githubLink.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-border text-foreground text-[0.9rem] hover:bg-accent/50 transition-all font-[Pretendard] backdrop-blur-sm"
-                >
-                  <GitHubIcon className="w-4 h-4" />
-                  GitHub 보기
-                </a>
-              </MagneticButton>
+              <a
+                href={githubLink.href}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl border border-border text-foreground text-[0.9rem] hover:bg-accent/50 transition-colors font-[Pretendard] backdrop-blur-sm"
+              >
+                <GitHubIcon className="w-4 h-4" />
+                GitHub 보기
+              </a>
             )}
           </motion.div>
 
@@ -243,17 +217,15 @@ export function HomePage() {
             <div className="h-px w-8 bg-border" />
             <div className="flex gap-2">
               {githubLink && (
-                <MagneticButton>
-                  <a
-                    href={githubLink.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={githubLink.label}
-                    className="w-10 h-10 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:text-emerald-500 hover:border-emerald-500/30 hover:bg-emerald-500/5 transition-all"
-                  >
-                    <GitHubIcon className="w-4 h-4" />
-                  </a>
-                </MagneticButton>
+                <a
+                  href={githubLink.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={githubLink.label}
+                  className="w-10 h-10 rounded-xl border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:border-foreground/30 hover:bg-foreground/5 transition-colors"
+                >
+                  <GitHubIcon className="w-4 h-4" />
+                </a>
               )}
             </div>
           </motion.div>

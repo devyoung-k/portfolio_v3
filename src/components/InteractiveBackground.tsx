@@ -48,10 +48,10 @@ export function InteractiveBackground() {
             hoverColor: '16,185,129',
           }
         : {
-            baseAlpha: 0.08,
-            hoverAlpha: 0.2,
-            baseColor: '15,23,42',
-            hoverColor: '13,148,136',
+            baseAlpha: 0.1,
+            hoverAlpha: 0.22,
+            baseColor: '24,24,27',
+            hoverColor: '4,120,87',
           };
     };
 
