@@ -6,10 +6,12 @@ import { GitHubIcon } from '@/components/icons';
 import { profile } from '@/data/profile';
 
 const typewriterLines = [
-  'const developer = {',
-  `  name: "${profile.name}",`,
-  `  role: "${profile.role}",`,
-  '  buildsForUsers: true,',
+  '// 지금',
+  'const now = {',
+  `  building: "${profile.now.building}",`,
+  `  reading:  "${profile.now.reading}",`,
+  `  stuckOn:  "${profile.now.stuckOn}",`,
+  `  curious:  "${profile.now.curious}",`,
   '};',
 ];
 
@@ -58,13 +60,16 @@ function TypeWriter() {
           const hasColon = text.includes(':');
           const parts = hasColon ? text.split(':') : [text];
 
+          const isComment = text.trimStart().startsWith('//');
           return (
             <div key={`${line}-${index}`} className="flex">
               <span className="text-white/20 w-6 shrink-0 select-none text-right mr-4">
                 {index + 1}
               </span>
               <span className="whitespace-pre">
-                {hasColon ? (
+                {isComment ? (
+                  <span className="text-white/35 italic">{text}</span>
+                ) : hasColon ? (
                   <>
                     <span className="text-sky-300">{parts[0]}</span>
                     <span className="text-white/60">:</span>

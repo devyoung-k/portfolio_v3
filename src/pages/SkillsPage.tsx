@@ -210,6 +210,10 @@ export function SkillsPage() {
             ))}
           </motion.div>
         </AnimatePresence>
+
+        <p className="max-w-3xl mx-auto mt-8 text-[0.7rem] font-mono tracking-wider text-muted-foreground/70">
+          LEARNING · Rust · React Server Components · Kubernetes
+        </p>
       </div>
     </section>
   );
