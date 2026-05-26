@@ -108,9 +108,9 @@ const skills: Record<SkillCategory, Skill[]> = {
 };
 
 const tierLabel: Record<SkillTier, string> = {
-  CORE: '매일 · 프로덕션 깊이',
-  WORKING: '실전 도입 경험',
-  FAMILIAR: '필요시 적용 가능',
+  CORE: '주력',
+  WORKING: '실전 도입',
+  FAMILIAR: '필요시 사용',
 };
 
 export function SkillsPage() {

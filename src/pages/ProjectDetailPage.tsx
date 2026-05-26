@@ -2,6 +2,7 @@ import { useParams, Link, useNavigate } from 'react-router';
 import { motion } from 'motion/react';
 import {
   ArrowLeft,
+  ArrowRight,
   ExternalLink,
   Star,
   AlertTriangle,
@@ -75,25 +76,61 @@ export function ProjectDetailPage() {
   const project = projects[projectIndex];
 
   if (!project) {
+    const suggestions = projects.slice(0, 3);
     return (
-      <section className="min-h-screen flex flex-col items-center justify-center px-6">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="text-center"
-        >
-          <p className="text-[4rem] mb-4">404</p>
-          <p className="text-muted-foreground text-[1.1rem] mb-8 font-[Pretendard]">
-            프로젝트를 찾을 수 없습니다.
-          </p>
+      <section className="min-h-screen px-6 pt-32 pb-20">
+        <div className="max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <p className="text-muted-foreground font-mono text-[0.7rem] tracking-[0.2em] mb-4">
+              404 · NOT FOUND
+            </p>
+            <h1 className="text-foreground font-[Pretendard] text-[2rem] md:text-[2.5rem] leading-tight mb-4">
+              프로젝트를 찾을 수 없습니다.
+            </h1>
+            <p className="text-muted-foreground text-[0.95rem] leading-[1.8] mb-10 font-[Pretendard]">
+              {slug ? `요청하신 “${slug}” 슬러그가 존재하지 않습니다.` : '존재하지 않는 경로입니다.'}{' '}
+              아래 프로젝트 중 하나를 확인해보세요.
+            </p>
+          </motion.div>
+
+          <div className="space-y-3 mb-10">
+            {suggestions.map((p, i) => (
+              <motion.div
+                key={p.slug}
+                initial={{ opacity: 0, y: 8 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.35, delay: 0.1 + i * 0.05 }}
+              >
+                <Link
+                  to={`/projects/${p.slug}`}
+                  className="flex items-start justify-between gap-4 px-5 py-4 rounded-xl border border-border bg-card hover:border-foreground/20 transition-colors group"
+                >
+                  <div className="min-w-0">
+                    <h3 className="text-foreground font-[Pretendard] mb-1">
+                      {p.title}
+                    </h3>
+                    <p className="text-muted-foreground text-[0.85rem] font-[Pretendard] line-clamp-1">
+                      {p.description}
+                    </p>
+                  </div>
+                  <ArrowRight className="w-4 h-4 mt-1 text-muted-foreground group-hover:text-foreground group-hover:translate-x-0.5 transition-all shrink-0" />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
           <Link
             to="/projects"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand text-brand-foreground text-[0.9rem] font-[Pretendard]"
+            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors text-[0.85rem] font-[Pretendard]"
           >
             <ArrowLeft className="w-4 h-4" />
-            프로젝트 목록으로
+            전체 프로젝트 보기
           </Link>
-        </motion.div>
+        </div>
       </section>
     );
   }
@@ -361,22 +398,18 @@ export function ProjectDetailPage() {
                 transition={{ delay: i * 0.1 }}
                 className="rounded-2xl bg-card border border-border overflow-hidden"
               >
-                <div className="px-6 py-5 border-b border-border bg-red-500/3">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="px-2.5 py-1 rounded-md bg-red-500/10 text-red-400 text-[0.7rem] font-mono">
-                      PROBLEM
-                    </span>
-                  </div>
+                <div className="px-6 py-5 border-b border-border">
+                  <span className="inline-block px-2.5 py-1 mb-3 rounded-md border border-border bg-card/40 text-muted-foreground text-[0.7rem] font-mono tracking-wider">
+                    PROBLEM
+                  </span>
                   <p className="text-muted-foreground text-[0.875rem] leading-[1.9] font-[Pretendard]">
                     {c.problem}
                   </p>
                 </div>
-                <div className="px-6 py-5 bg-green-500/3">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className="px-2.5 py-1 rounded-md bg-green-500/10 text-green-400 text-[0.7rem] font-mono">
-                      SOLUTION
-                    </span>
-                  </div>
+                <div className="px-6 py-5">
+                  <span className="inline-block px-2.5 py-1 mb-3 rounded-md border border-border bg-card/40 text-foreground text-[0.7rem] font-mono tracking-wider">
+                    SOLUTION
+                  </span>
                   <p className="text-muted-foreground text-[0.875rem] leading-[1.9] font-[Pretendard]">
                     {c.solution}
                   </p>

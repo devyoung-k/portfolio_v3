@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import { motion } from 'motion/react';
 import { ArrowRight, Terminal } from 'lucide-react';
-import { TextReveal } from '@/components/TextReveal';
 import { GitHubIcon } from '@/components/icons';
 import { profile } from '@/data/profile';
 
@@ -119,28 +118,20 @@ export function HomePage() {
             </span>
           </motion.div>
 
-          <TextReveal
-            as="h1"
-            className="text-foreground font-[Pretendard] text-[2.5rem] md:text-[3.25rem] leading-[1.15] mb-3"
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-foreground font-[Pretendard] text-[2.5rem] md:text-[3.25rem] leading-[1.2] mb-6"
           >
             안녕하세요,
-          </TextReveal>
-
-          <TextReveal
-            as="h1"
-            delay={0.2}
-            className="text-foreground font-[Pretendard] text-[2.5rem] md:text-[3.25rem] leading-[1.15]"
-          >
-            {profile.heroRole}
-          </TextReveal>
-
-          <TextReveal
-            as="h1"
-            delay={0.35}
-            className="text-foreground font-[Pretendard] text-[2.5rem] md:text-[3.25rem] leading-[1.15] mb-6"
-          >
-            {`${profile.name}입니다.`}
-          </TextReveal>
+            <br />
+            <span className="relative inline-block">
+              {profile.heroRole}
+              <span className="absolute -bottom-0.5 left-0 right-0 h-[3px] bg-brand/70 rounded-full" />
+            </span>{' '}
+            {profile.name}입니다.
+          </motion.h1>
 
           <motion.div
             initial={{ opacity: 0, y: 40 }}

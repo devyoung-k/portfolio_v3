@@ -3,6 +3,8 @@ import path from 'path'
 import tailwindcss from '@tailwindcss/vite'
 import react from '@vitejs/plugin-react'
 
+const buildDate = new Date().toISOString().slice(0, 7).replace('-', '.')
+
 export default defineConfig({
   plugins: [
     react({
@@ -16,5 +18,8 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
+  },
+  define: {
+    __BUILD_DATE__: JSON.stringify(buildDate),
   },
 })

@@ -57,6 +57,7 @@ export function AboutPage() {
           badge="ABOUT"
           title="개발자 소개"
           description={`${profile.name}의 개발 방식과 주요 작업 흐름을 소개합니다`}
+          align="left"
         />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-12">

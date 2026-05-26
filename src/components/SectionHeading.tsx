@@ -6,6 +6,7 @@ interface SectionHeadingProps {
   title: string;
   description?: string;
   sequence?: string;
+  align?: 'left' | 'center';
 }
 
 export function SectionHeading({
@@ -13,9 +14,11 @@ export function SectionHeading({
   title,
   description,
   sequence,
+  align = 'center',
 }: SectionHeadingProps) {
+  const isLeft = align === 'left';
   return (
-    <div className="text-center mb-20">
+    <div className={`mb-20 ${isLeft ? 'text-left' : 'text-center'}`}>
       <motion.span
         initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -41,7 +44,9 @@ export function SectionHeading({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-muted-foreground max-w-xl mx-auto text-[1rem] font-[Pretendard] leading-relaxed"
+          className={`text-muted-foreground text-[1rem] font-[Pretendard] leading-relaxed ${
+            isLeft ? 'max-w-xl' : 'max-w-xl mx-auto'
+          }`}
         >
           {description}
         </motion.p>
