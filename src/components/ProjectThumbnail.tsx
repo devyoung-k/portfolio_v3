@@ -5,6 +5,8 @@ type Slug = 'apiguard' | 'find-it' | 'k-type' | 'brevoca';
 interface ProjectThumbnailProps {
   slug: string;
   className?: string;
+  image?: string;
+  alt?: string;
 }
 
 function ApiGuardSchematic() {
@@ -314,7 +316,20 @@ const map: Record<Slug, () => ReactElement> = {
   brevoca: BrevocaSchematic,
 };
 
-export function ProjectThumbnail({ slug, className }: ProjectThumbnailProps) {
+export function ProjectThumbnail({ slug, className, image, alt }: ProjectThumbnailProps) {
+  if (image && image.startsWith('/')) {
+    return (
+      <div className={className}>
+        <img
+          src={image}
+          alt={alt ?? slug}
+          className="w-full h-full object-cover"
+          loading="lazy"
+        />
+      </div>
+    );
+  }
+
   const Schematic =
     (map as Record<string, () => ReactElement>)[slug] ?? DefaultSchematic;
   return (

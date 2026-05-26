@@ -79,6 +79,8 @@ export function ProjectsPage() {
                     <div className={`relative ${isHero ? 'h-72 md:h-80' : 'h-52'} overflow-hidden border-b border-border`}>
                       <ProjectThumbnail
                         slug={project.slug}
+                        image={project.image}
+                        alt={project.title}
                         className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.03] group-hover:-translate-y-1"
                       />
 

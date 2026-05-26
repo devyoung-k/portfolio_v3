@@ -195,7 +195,12 @@ export function ProjectDetailPage() {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="rounded-2xl overflow-hidden border border-border mb-12 aspect-[16/9] bg-card"
         >
-          <ProjectThumbnail slug={project.slug} className="w-full h-full" />
+          <ProjectThumbnail
+            slug={project.slug}
+            image={project.image}
+            alt={project.title}
+            className="w-full h-full"
+          />
         </motion.div>
 
         {/* Meta info */}

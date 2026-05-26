@@ -43,8 +43,7 @@ export const projects: Project[] = [
       '워크스페이스 기반 API 모니터링 SaaS입니다. 프론트엔드에서는 대시보드, 권한별 UI, 결제 흐름을 구현했고, 백엔드에서는 주기적 헬스체크와 알림, 플랜 정책을 구현했습니다.',
     longDescription:
       'APIGuard는 API 엔드포인트 상태를 주기적으로 점검하고 장애 대응 시간을 줄이기 위한 모니터링 SaaS입니다. 프론트엔드에서는 워크스페이스 기반 대시보드와 운영 UI를 구현했고, 백엔드에서는 스케줄러 기반 헬스체크, 실패 임계치 알림, 플랜 및 결제 정책을 처리하는 서버를 구현했습니다.',
-    image:
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=60',
+    image: '/images/projects/apiguard.png',
     screenshots: [],
     tags: [
       'Next.js',
