@@ -158,7 +158,7 @@ export const projects: Project[] = [
     description:
       '공공 분실물 데이터를 더 쉽게 찾을 수 있도록 검색 경험을 개선한 서비스입니다. 프론트엔드에서는 FSD 아키텍처 기반 탐색 UI를, 백엔드에서는 경찰청 API 연동과 스케줄러 기반 데이터 수집을 구현했습니다.',
     longDescription:
-      '공공 분실물 데이터를 더 쉽게 찾을 수 있도록 검색 경험을 개선한 서비스입니다. 프론트엔드에서는 Feature-Sliced Design 아키텍처 기반으로 검색, 필터, 지도 시각화 UI를 구현하고, 백엔드에서는 Spring Boot 기반 DDD 구조로 경찰청 Open API 데이터를 수집·가공하는 서버를 구현했습니다. PostgreSQL ON CONFLICT 기반 배치 upsert와 스케줄러 기반 자동 동기화로 데이터를 관리하고, Docker + GitHub Actions CI/CD로 EC2에 배포했습니다.',
+      '공공 분실물 데이터를 더 쉽게 찾을 수 있도록 검색 경험을 개선한 풀스택 서비스입니다. 프론트엔드에서는 Feature-Sliced Design 아키텍처 기반으로 검색·필터·지도 시각화·무한 스크롤 탐색 UI와 함께 JWT 인증, 커뮤니티 게시판, 키워드 기반 알림까지 구현했습니다. 백엔드에서는 Spring Boot 기반 DDD 구조로 경찰청 Open API 데이터를 수집·가공하는 REST 서버를 구현했고, PostgreSQL ON CONFLICT 배치 upsert와 스케줄러 기반 자동 동기화로 데이터를 관리합니다. 멀티 아키텍처(amd64/arm64) Docker 이미지와 GitHub Actions CI/CD로 Oracle Cloud(Ampere ARM64)에 배포했습니다.',
     image:
       'https://images.unsplash.com/photo-1586769852044-692d6e3703f0?w=800&auto=format&fit=crop&q=60',
     screenshots: [],
@@ -197,7 +197,7 @@ export const projects: Project[] = [
       },
     ],
     backendNote:
-      '백엔드는 별도 비공개 저장소에서 Spring Boot + Java 21 기반으로 개발했으며, DDD 계층 구조로 경찰청 API 연동, 스케줄러 기반 데이터 수집, API Key 인증, Prometheus 모니터링을 구현했습니다.',
+      '백엔드는 별도 비공개 저장소에서 Spring Boot + Java 21 기반으로 개발했으며, DDD 계층 구조로 경찰청 API 연동, 스케줄러 기반 데이터 수집, API Key·JWT 이중 인증, 커뮤니티·알림 도메인, Prometheus 모니터링을 구현했습니다.',
     detail: {
       overview:
         'Find It은 공공 분실물 데이터를 더 쉽게 탐색할 수 있도록 검색 경험을 개선한 서비스입니다. 프론트엔드에서는 Feature-Sliced Design 아키텍처를 채택해 entities, features, widgets, pages 단위로 코드를 분리했고, React Query 기반 캐싱과 전역 프로그레스바로 로딩 UX를 통일했습니다. 백엔드에서는 Spring Boot 기반 DDD 계층 구조(presentation, application, domain, infrastructure)로 경찰청 API 데이터를 수집·가공하는 REST API 서버를 구현했습니다.',
@@ -210,6 +210,7 @@ export const projects: Project[] = [
             'Kakao Map API를 연동해 보관 위치를 지도에서 확인할 수 있도록 구성했습니다.',
             'Feature-Sliced Design 아키텍처를 도입해 도메인별 코드 분리와 재사용성을 확보했습니다.',
             '전역 프로그레스바를 도입해 페이지 전환 시 로딩 UX를 통일했습니다.',
+            'JWT 기반 인증(로그인·회원가입·비밀번호 재설정), 커뮤니티 게시판, 키워드 알림 등 사용자 기능을 구현했습니다.',
           ],
         },
         {
@@ -219,7 +220,7 @@ export const projects: Project[] = [
             '스케줄러 기반 데이터 자동 수집과 PostgreSQL 배치 upsert를 구현했습니다.',
             '분실물/습득물 검색, 필터링, 날짜 범위 조회 등 REST API를 설계했습니다.',
             'DDD 계층 구조로 도메인 로직과 인프라를 분리하고, Flyway로 스키마를 관리했습니다.',
-            'Docker + GitHub Actions CI/CD 파이프라인으로 EC2 배포를 자동화했습니다.',
+            '멀티 아키텍처(amd64/arm64) Docker 이미지와 GitHub Actions CI/CD로 Oracle Cloud(Ampere ARM64) 배포를 자동화했습니다.',
           ],
         },
       ],
@@ -240,7 +241,7 @@ export const projects: Project[] = [
             '경찰청 API의 XML/JSON 응답을 자동 감지해 JAXB 또는 Jackson으로 파싱하는 듀얼 파서를 구현했습니다.',
             'PostgreSQL ON CONFLICT 기반 배치 upsert로 JPA 개별 저장 대비 대량 데이터 수집 성능을 개선했습니다.',
             '자정/정오 스케줄러와 애플리케이션 시작 시 최근 7일치 데이터를 자동 수집하는 동기화 로직을 구현했습니다.',
-            'API Key 인증 필터와 Spring Security 기반 엔드포인트 보호를 구성했습니다.',
+            '데이터 API는 API Key 필터로, 사용자 도메인(인증·커뮤니티·알림)은 JWT로 보호하는 이중 인증을 Spring Security로 구성했습니다.',
             'Micrometer + Prometheus 기반 커스텀 메트릭과 헬스 인디케이터로 서버 상태를 모니터링했습니다.',
             'Spring Retry로 외부 API 호출 실패 시 자동 재시도(3회, 1초 백오프)를 적용했습니다.',
             'AWS SSM Parameter Store에서 시크릿을 주입하는 커스텀 EnvironmentPostProcessor를 구현했습니다.',
@@ -253,11 +254,12 @@ export const projects: Project[] = [
       'React Query를 활용한 검색 결과 조회와 캐싱 흐름 구성',
       '검색, 필터, 무한 스크롤 등 탐색 중심의 UI 구현',
       'Kakao Map API 연동으로 보관 위치 지도 시각화',
+      'JWT 인증·커뮤니티 게시판·키워드 알림까지 사용자 기능 구현',
       'DDD 계층 구조(presentation/application/domain/infrastructure)로 백엔드 설계',
       '경찰청 API XML/JSON 듀얼 파싱과 스케줄러 기반 자동 데이터 수집',
       'PostgreSQL ON CONFLICT 배치 upsert로 대량 데이터 수집 최적화',
-      'API Key 인증과 Prometheus 기반 모니터링 구성',
-      'Docker + GitHub Actions CI/CD로 EC2 자동 배포',
+      'API Key·JWT 이중 인증과 Prometheus 기반 모니터링 구성',
+      '멀티 아키텍처 Docker + GitHub Actions CI/CD로 Oracle Cloud 자동 배포',
     ],
     challenges: [
       {
